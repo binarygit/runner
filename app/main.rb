@@ -33,7 +33,7 @@ class MyGame
 
   def render
     outputs.solids << {x: 0, y: 200, w: 1280, h: 20}
-    outputs.sprites << {x: 0, y: state.player.y, w: 100, h: 100, path: 'sprites/mine/adventurer-attack1-00.png'}
+    render_sagar
   end
 
   def input
@@ -48,6 +48,20 @@ class MyGame
     if inputs.keyboard.key_up.space
      state.player.falling = true
     end
+  end
+
+  def render_sagar
+    start_looping_at = 0
+
+    sprite_index =
+      start_looping_at.frame_index count: 6,
+      hold_for: 6,
+      repeat: true,
+      repeat_index: 0,
+      tick_count_override: Kernel.tick_count
+
+    sprite_index ||= 0
+    outputs.sprites << {x: 0, y: state.player.y, w: 100, h: 100, path: "sprites/mine/adventurer-run-0#{sprite_index}.png"}
   end
 end
 
