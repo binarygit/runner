@@ -10,22 +10,18 @@ class MyGame
   private
 
   def defaults
-    state.rotation ||= 0
-    state.x ||= 576
-    state.y ||= 0
+    state.y ||= 201
   end
 
   def calc
-    if inputs.mouse.click
-      state.x = inputs.mouse.click.point.x - 64
-      state.y = inputs.mouse.click.point.y - 50
+    if inputs.keyboard.up
+      state.y += 5
     end
   end
 
   def render
-    outputs.labels << {x: 580, y: 400, text: 'Hello World!'}
-    outputs.sprites << {x: state.x, y: state.y, w: 128, h: 101, path: 'dragonruby.png', angle: state.rotation}
-    state.rotation -= 1
+    outputs.solids << {x: 0, y: 200, w: 1280, h: 20}
+    outputs.sprites << {x: 0, y: state.y, w: 100, h: 100, path: 'sprites/mine/adventurer-attack1-00.png'}
   end
 end
 
