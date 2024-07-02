@@ -23,9 +23,9 @@ class MyGame
   end
 
   def render
-    args.outputs.labels << [580, 400, 'Hello World!']
-    args.outputs.sprites << [args.state.x, args.state.y, 128, 101, 'dragonruby.png', args.state.rotation]
-    args.state.rotation -= 1
+    outputs.labels << {x: 580, y: 400, text: 'Hello World!'}
+    outputs.sprites << {x: state.x, y: state.y, w: 128, h: 101, path: 'dragonruby.png', angle: state.rotation}
+    state.rotation -= 1
   end
 end
 
