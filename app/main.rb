@@ -40,6 +40,7 @@ class MyGame
     if inputs.keyboard.space
      state.player.jumped_at ||= state.tick_count
 
+     
       if state.player.jumped_at.elapsed_time < state.player_jump_power_duration && !state.player.falling
        state.player.dy = state.player_jump_power
       end
@@ -47,21 +48,22 @@ class MyGame
 
     if inputs.keyboard.key_up.space
      state.player.falling = true
+     outputs.sounds << "sounds/jump_10.wav"
     end
   end
 
   def render_sagar
-    start_looping_at = 0
+    outputs.sprites << {x: 0, y: state.player.y, w: 100, h: 100, path: "sprites/mine/adventurer-run-0#{sprite_index}.png"}
+  end
 
-    sprite_index =
-      start_looping_at.frame_index count: 6,
+  def sprite_index
+    Numeric.frame_index count: 6,
+      start_at: 0,
       hold_for: 6,
       repeat: true,
       repeat_index: 0,
       tick_count_override: Kernel.tick_count
 
-    sprite_index ||= 0
-    outputs.sprites << {x: 0, y: state.player.y, w: 100, h: 100, path: "sprites/mine/adventurer-run-0#{sprite_index}.png"}
   end
 end
 
